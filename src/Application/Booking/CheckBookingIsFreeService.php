@@ -4,13 +4,20 @@ declare(strict_types=1);
 
 namespace App\Application\Booking;
 
+use App\Application\Room\CheckOrAddRoomService;
+use App\Domain\Model\Booking\BookingRepository;
+
 class CheckBookingIsFreeService
 {
     private $bookingRepository;
+    private $checkRoomExists;
 
-
-    public function __construct(BookingRepository $bookingRepository){
+    public function __construct(
+        BookingRepository $bookingRepository,
+        CheckOrAddRoomService $checkRoomExists
+    ){
         $this->bookingRepository = $bookingRepository;
+        $this->checkRoomExists = $checkRoomExists;
     }
 
     /**
@@ -19,8 +26,7 @@ class CheckBookingIsFreeService
      */
     public function check(CheckBookingIsFreeRequest $request) : bool
     {
-        //TODO: COMPROBAR QUE LA HABITACION EXISTA ANTES DE COMPROBAR DISPONIBILIDAD
-
+        $room = $this->checkRoomExists->check($request->getRoomId());
 
         return $this->bookingRepository->checkAvailability(
             $request->getRoomId(),

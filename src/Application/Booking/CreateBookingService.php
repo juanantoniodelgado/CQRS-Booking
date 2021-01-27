@@ -7,15 +7,15 @@ namespace App\Application\Booking;
 class CreateBookingService
 {
     /** @var CheckBookingIsFreeService  */
-    private $checker;
+    private $isFreeService;
 
     /**
      * CreateBookingService constructor.
-     * @param CheckBookingIsFreeService $checker
+     * @param CheckBookingIsFreeService $isFreeService
      */
-    public function __construct(CheckBookingIsFreeService $checker)
+    public function __construct(CheckBookingIsFreeService $isFreeService)
     {
-        $this->checker = $checker;
+        $this->isFreeService = $isFreeService;
     }
 
     /**
@@ -23,7 +23,7 @@ class CreateBookingService
      */
     public function create(CreateBookingRequest $request)
     {
-        $this->checker->check(new CheckBookingIsFreeRequest(
+        $this->isFreeService->check(new CheckBookingIsFreeRequest(
                 $request->getRoomId(),
                 $request->getArrival(),
                 $request->getDeparture()
