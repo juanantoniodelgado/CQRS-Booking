@@ -6,5 +6,5 @@ namespace App\Domain\Model\User;
 
 interface UserRepository
 {
-    public function findUserById(int $userId);
+    public function findUserById(int $userId) : User;
 }

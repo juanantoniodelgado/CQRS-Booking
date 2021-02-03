@@ -4,27 +4,35 @@ declare(strict_types=1);
 
 namespace App\Application\Booking;
 
+use \DateTimeImmutable;
+
 class CreateBookingRequest
 {
-    private $userId;
-
-    private $roomId;
-
-    private $arrival;
-
-    private $departure;
+    private int $userId;
+    private int $roomId;
+    private string $roomName;
+    private DateTimeImmutable $arrival;
+    private DateTimeImmutable $departure;
 
     /**
      * CreateBookingRequest constructor.
+     *
      * @param int $userId
      * @param int $roomId
-     * @param \DateTimeImmutable $arrival
-     * @param \DateTimeImmutable $departure
+     * @param string $roomName
+     * @param DateTimeImmutable $arrival
+     * @param DateTimeImmutable $departure
      */
-    public function __construct(int $userId, int $roomId, \DateTimeImmutable $arrival, \DateTimeImmutable $departure)
-    {
+    public function __construct(
+        int $userId,
+        int $roomId,
+        string $roomName,
+        DateTimeImmutable $arrival,
+        DateTimeImmutable $departure
+    ){
         $this->userId = $userId;
         $this->roomId = $roomId;
+        $this->roomName = $roomName;
         $this->arrival = $arrival;
         $this->departure = $departure;
     }
@@ -32,7 +40,7 @@ class CreateBookingRequest
     /**
      * @return int
      */
-    public function getUserId()
+    public function getUserId(): int
     {
         return $this->userId;
     }
@@ -40,23 +48,31 @@ class CreateBookingRequest
     /**
      * @return int
      */
-    public function getRoomId()
+    public function getRoomId(): int
     {
         return $this->roomId;
     }
 
     /**
-     * @return \DateTimeImmutable
+     * @return string
      */
-    public function getArrival()
+    public function getRoomName(): string
+    {
+        return $this->roomName;
+    }
+
+    /**
+     * @return DateTimeImmutable
+     */
+    public function getArrival(): DateTimeImmutable
     {
         return $this->arrival;
     }
 
     /**
-     * @return \DateTimeImmutable
+     * @return DateTimeImmutable
      */
-    public function getDeparture()
+    public function getDeparture(): DateTimeImmutable
     {
         return $this->departure;
     }

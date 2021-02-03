@@ -4,24 +4,31 @@ declare(strict_types=1);
 
 namespace App\Application\Booking;
 
+use \DateTimeImmutable;
 
-class CheckBookingIsFreeRequest
+class CheckRoomAvailabilityRequest
 {
-    private $roomId;
-
-    private $arrival;
-
-    private $departure;
+    private int $roomId;
+    private string $name;
+    private DateTimeImmutable $arrival;
+    private DateTimeImmutable $departure;
 
     /**
      * CheckBookingIsFreeRequest constructor.
+     *
      * @param int $roomId
-     * @param \DateTimeImmutable $arrival
-     * @param \DateTimeImmutable $departure
+     * @param string $name
+     * @param DateTimeImmutable $arrival
+     * @param DateTimeImmutable $departure
      */
-    public function __construct(int $roomId, \DateTimeImmutable $arrival, \DateTimeImmutable $departure)
-    {
+    public function __construct(
+        int $roomId,
+        string $name,
+        DateTimeImmutable $arrival,
+        DateTimeImmutable $departure
+    ){
         $this->roomId = $roomId;
+        $this->name = $name;
         $this->arrival = $arrival;
         $this->departure = $departure;
     }
@@ -29,23 +36,31 @@ class CheckBookingIsFreeRequest
     /**
      * @return int
      */
-    public function getRoomId()
+    public function getRoomId(): int
     {
         return $this->roomId;
     }
 
     /**
-     * @return \DateTimeImmutable
+     * @return string
      */
-    public function getArrival()
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return DateTimeImmutable
+     */
+    public function getArrival(): DateTimeImmutable
     {
         return $this->arrival;
     }
 
     /**
-     * @return \DateTimeImmutable
+     * @return DateTimeImmutable
      */
-    public function getDeparture()
+    public function getDeparture(): DateTimeImmutable
     {
         return $this->departure;
     }

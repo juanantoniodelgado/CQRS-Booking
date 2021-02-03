@@ -6,5 +6,7 @@ namespace App\Domain\Model\Room;
 
 interface RoomRepository
 {
-    public function findRoomById(int $roomId);
+    public function byId(int $roomId): Room;
+
+    public function save(Room $room): void;
 }
