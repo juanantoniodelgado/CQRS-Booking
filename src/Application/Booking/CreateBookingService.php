@@ -20,6 +20,7 @@ class CreateBookingService
 
     /**
      * @param CreateBookingRequest $request
+     * @throws \App\Infrastructure\Exception\InvalidParameterException
      */
     public function create(CreateBookingRequest $request)
     {

@@ -38,7 +38,7 @@ class DoctrineRoomRepository extends EntityRepository implements RoomRepository
                 ->getSingleResult()
             ;
 
-        } catch (UnexpectedResultException $exception) {
+        } catch (UnexpectedResultException) {
 
             throw new EntityNotFoundException();
         }

@@ -4,39 +4,36 @@ declare(strict_types=1);
 
 namespace App\Application\Booking;
 
-use App\Application\Room\CheckOrAddRoomService;
+use App\Application\Room\GetOrAddRoomService;
 use App\Domain\Model\Booking\BookingRepository;
+use App\Infrastructure\Exception\InvalidParameterException;
 
 class CheckRoomAvailabilityService
 {
     private BookingRepository $bookingRepository;
-    private CheckOrAddRoomService $checkRoomExists;
+    private GetOrAddRoomService $getOrAddRoom;
 
     public function __construct(
         BookingRepository $bookingRepository,
-        CheckOrAddRoomService $checkRoomExists
+        GetOrAddRoomService $checkRoomExists
     ){
         $this->bookingRepository = $bookingRepository;
-        $this->checkRoomExists = $checkRoomExists;
+        $this->getOrAddRoom = $checkRoomExists;
     }
 
     /**
      * @param CheckRoomAvailabilityRequest $request
      * @return bool
+     * @throws InvalidParameterException
      */
     public function check(CheckRoomAvailabilityRequest $request) : bool
     {
-        $room = $this->checkRoomExists->check(
-            $request->getRoomId(),
-            $request->getName()
-        );
+        $this->getOrAddRoom->check($request->getRoomId(), $request->getName());
 
         return $this->bookingRepository->checkAvailability(
             $request->getRoomId(),
             $request->getArrival(),
             $request->getDeparture()
         );
-
-        return true;
     }
 }

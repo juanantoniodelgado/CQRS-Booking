@@ -6,6 +6,7 @@ namespace App\Application\Room;
 
 use App\Domain\Model\Room\Room;
 use App\Domain\Model\Room\RoomRepository;
+use App\Infrastructure\Exception\InvalidParameterException;
 
 class AddRoomService
 {
@@ -16,6 +17,14 @@ class AddRoomService
         $this->repository = $repository;
     }
 
+    /**
+     * @param int $roomId
+     * @param string $name
+     *
+     * @return Room
+     *
+     * @throws InvalidParameterException
+     */
     public function create(int $roomId, string $name): Room
     {
         $room = new Room($roomId, $name);

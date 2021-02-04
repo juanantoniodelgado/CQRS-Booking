@@ -18,6 +18,6 @@ class DoctrineBookingRepository extends EntityRepository implements BookingRepos
      */
     public function checkAvailability(int $roomId, DateTimeImmutable $arrival, DateTimeImmutable $departure) : bool
     {
-
+        return false;
     }
 }

@@ -20,6 +20,7 @@ class RoomTest extends TestCase
 
     /**
      * @test
+     * @throws InvalidParameterException
      */
     public function testCreateValidRoom()
     {
@@ -44,7 +45,7 @@ class RoomTest extends TestCase
         $name= $this->faker->name;
 
         $this->expectException(InvalidParameterException::class);
-        $room = new Room ($id, $name);
+        new Room($id, $name);
     }
 
     /**
@@ -56,7 +57,7 @@ class RoomTest extends TestCase
         $name= '';
 
         $this->expectException(InvalidParameterException::class);
-        $room = new Room ($id, $name);
+        new Room($id, $name);
     }
 
     /**
@@ -68,6 +69,6 @@ class RoomTest extends TestCase
         $name = 'ThisIsAVeryLongWordPleaseFakerStartTreatingStrings.';
 
         $this->expectException(InvalidParameterException::class);
-        $room = new Room($id, $name);
+        new Room($id, $name);
     }
 }
