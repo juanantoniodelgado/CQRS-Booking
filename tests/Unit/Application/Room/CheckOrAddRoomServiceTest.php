@@ -4,27 +4,27 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Application\Room;
 
-use App\Application\Booking\CheckRoomAvailabilityRequest;
 use App\Application\Room\AddRoomService;
-use App\Application\Room\CheckOrAddRoomService;
-use App\Domain\Model\Room\Room;
+use App\Application\Room\GetOrAddRoomService;
 use App\Domain\Model\Room\RoomRepository;
 use App\Infrastructure\Exception\EntityNotFoundException;
+use App\Infrastructure\Exception\InvalidParameterException;
 use App\Tests\Unit\Domain\RoomMother;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 class CheckOrAddRoomServiceTest extends TestCase
 {
-    private $roomRepository;
-    private $addRoomService;
-    private $service;
+    private MockObject $roomRepository;
+    private MockObject $addRoomService;
+    private GetOrAddRoomService $getRoomService;
 
     public function setUp() : void
     {
         $this->roomRepository = $this->createMock(RoomRepository::class);
         $this->addRoomService = $this->createMock(AddRoomService::class);
 
-        $this->service = new CheckOrAddRoomService(
+        $this->getRoomService = new GetOrAddRoomService(
             $this->roomRepository,
             $this->addRoomService
         );
@@ -32,6 +32,8 @@ class CheckOrAddRoomServiceTest extends TestCase
 
     /**
      * @test
+     *
+     * @throws InvalidParameterException
      */
     public function testAddCheck()
     {
@@ -45,13 +47,15 @@ class CheckOrAddRoomServiceTest extends TestCase
             ->method('create')
             ->willReturn($room);
 
-        $result = $this->service->check($room->getId(), $room->getName());
+        $result = $this->getRoomService->check($room->getId(), $room->getName());
 
         $this->assertSame($result, $room);
     }
 
     /**
      * @test
+     *
+     * @throws InvalidParameterException
      */
     public function testGetCheck()
     {
@@ -61,7 +65,7 @@ class CheckOrAddRoomServiceTest extends TestCase
             ->method('byId')
             ->willReturn($room);
 
-        $result = $this->service->check($room->getId(), $room->getName());
+        $result = $this->getRoomService->check($room->getId(), $room->getName());
 
         $this->assertSame($result, $room);
     }

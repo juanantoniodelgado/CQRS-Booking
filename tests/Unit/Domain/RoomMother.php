@@ -5,13 +5,15 @@ declare(strict_types=1);
 namespace App\Tests\Unit\Domain;
 
 use App\Domain\Model\Room\Room;
+use App\Infrastructure\Exception\InvalidParameterException;
 use Faker\Factory;
 
 final class RoomMother
 {
     /**
      * @return Room
-     * @throws \App\Infrastructure\Exception\InvalidParameterException
+     *
+     * @throws InvalidParameterException
      */
     public static function random(): Room
     {

@@ -31,6 +31,7 @@ class CheckRoomAvailabilityTest extends TestCase
 
     /**
      * @test
+     *
      * @throws InvalidParameterException
      */
     public function testCorrectCheck()

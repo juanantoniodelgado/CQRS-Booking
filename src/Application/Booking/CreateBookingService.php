@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace App\Application\Booking;
 
+use App\Infrastructure\Exception\InvalidParameterException;
+
 class CreateBookingService
 {
-    /** @var CheckRoomAvailabilityService  */
-    private $isFreeService;
+    private CheckRoomAvailabilityService $isFreeService;
 
     /**
      * CreateBookingService constructor.
+     *
      * @param CheckRoomAvailabilityService $isFreeService
      */
     public function __construct(CheckRoomAvailabilityService $isFreeService)
@@ -20,7 +22,8 @@ class CreateBookingService
 
     /**
      * @param CreateBookingRequest $request
-     * @throws \App\Infrastructure\Exception\InvalidParameterException
+     *
+     * @throws InvalidParameterException
      */
     public function create(CreateBookingRequest $request)
     {
@@ -32,7 +35,7 @@ class CreateBookingService
             )
         );
 
-        // true se guarda
-        // false se tira excepcion de que no esta disponible
+        // if true stores value
+        // if false throws bookingNotAvailableException
     }
 }
