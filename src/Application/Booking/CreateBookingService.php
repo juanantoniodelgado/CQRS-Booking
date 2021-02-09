@@ -4,30 +4,33 @@ declare(strict_types=1);
 
 namespace App\Application\Booking;
 
+use App\Domain\Model\Booking\Booking;
+use App\Infrastructure\Exception\BookingNotAvailableException;
 use App\Infrastructure\Exception\InvalidParameterException;
 
 class CreateBookingService
 {
-    private CheckRoomAvailabilityService $isFreeService;
+    private CheckRoomAvailabilityService $availabilityService;
 
     /**
      * CreateBookingService constructor.
      *
-     * @param CheckRoomAvailabilityService $isFreeService
+     * @param CheckRoomAvailabilityService $service
      */
-    public function __construct(CheckRoomAvailabilityService $isFreeService)
+    public function __construct(CheckRoomAvailabilityService $service)
     {
-        $this->isFreeService = $isFreeService;
+        $this->availabilityService = $service;
     }
 
     /**
      * @param CreateBookingRequest $request
      *
      * @throws InvalidParameterException
+     * @throws BookingNotAvailableException
      */
-    public function create(CreateBookingRequest $request)
+    public function create(CreateBookingRequest $request): Booking
     {
-        $bool = $this->isFreeService->check(new CheckRoomAvailabilityRequest(
+        $isAvailable = $this->availabilityService->check(new CheckRoomAvailabilityRequest(
                 $request->getRoomId(),
                 $request->getRoomName(),
                 $request->getArrival(),
@@ -35,7 +38,20 @@ class CreateBookingService
             )
         );
 
-        // if true stores value
-        // if false throws bookingNotAvailableException
+        if (!$isAvailable) {
+            throw new BookingNotAvailableException();
+        }
+
+
+//        // if true stores value
+//        $booking = new Booking(
+//            $request->client,
+//            $request->room,
+//            $request->getArrival(),
+//            $request->getDeparture()
+//        );
+//
+//        $this->repository->save($booking);
+//        return $booking;
     }
 }

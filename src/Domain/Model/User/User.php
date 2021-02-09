@@ -22,12 +22,37 @@ class User
      * @ORM\Column(name="id", type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    private int $id;
 
     /**
      * @var string $nickname
      *
      * @ORM\Column(name="nickname", type="string", length=30)
      */
-    private $nickname;
+    private string $nickname;
+
+    /**
+     * User constructor.
+     * @param string $nickname
+     */
+    public function __construct(string $nickname)
+    {
+        $this->nickname = $nickname;
+    }
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNickname(): string
+    {
+        return $this->nickname;
+    }
 }
