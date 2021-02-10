@@ -13,8 +13,6 @@ class CheckRoomAvailabilityRequest
     private DateTimeImmutable $departure;
 
     /**
-     * CheckBookingIsFreeRequest constructor.
-     *
      * @param int $roomId
      * @param DateTimeImmutable $arrival
      * @param DateTimeImmutable $departure

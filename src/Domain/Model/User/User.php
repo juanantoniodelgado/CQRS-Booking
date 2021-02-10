@@ -12,7 +12,6 @@ class User implements AggregateRoot
     private string $nickname;
 
     /**
-     * User constructor.
      * @param int $id
      * @param string $nickname
      */

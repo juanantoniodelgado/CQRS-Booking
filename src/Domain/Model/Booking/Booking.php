@@ -19,8 +19,6 @@ class Booking implements AggregateRoot
     private DateTimeImmutable $departure;
 
     /**
-     * Booking constructor.
-     *
      * @param User $client
      * @param Room $room
      * @param DateTimeImmutable $arrival

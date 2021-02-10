@@ -15,8 +15,6 @@ class Room implements AggregateRoot
     private string $name;
 
     /**
-     * Room constructor.
-     *
      * @param int $id
      * @param string $name
      *

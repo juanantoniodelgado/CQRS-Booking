@@ -16,7 +16,6 @@ class AddBookingRequest
     private DateTimeImmutable $departure;
 
     /**
-     * AddBookingRequest constructor.
      * @param int $userId
      * @param string $userName
      * @param int $roomId

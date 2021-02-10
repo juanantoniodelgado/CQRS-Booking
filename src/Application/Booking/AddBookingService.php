@@ -20,7 +20,6 @@ class AddBookingService
     private CheckRoomAvailabilityService $availabilityService;
 
     /**
-     * AddBookingService constructor.
      * @param GetRoomService $roomService
      * @param GetUserService $userService
      * @param CheckRoomAvailabilityService $availability
