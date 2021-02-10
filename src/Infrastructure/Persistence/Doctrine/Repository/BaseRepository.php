@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\Persistance\Doctrine\Repository;
+namespace App\Infrastructure\Persistence\Doctrine\Repository;
 
 use App\Domain\Model\AggregateRoot;
 use App\Infrastructure\Exception\WritingException;

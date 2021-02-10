@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\Persistance\Doctrine\Repository;
+namespace App\Infrastructure\Persistence\Doctrine\Repository;
 
 use \DateTimeImmutable;
 use App\Domain\Model\Booking\BookingRepositoryInterface;
