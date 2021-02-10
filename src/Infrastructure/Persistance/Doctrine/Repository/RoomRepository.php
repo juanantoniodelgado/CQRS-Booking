@@ -7,12 +7,9 @@ namespace App\Infrastructure\Persistance\Doctrine\Repository;
 use App\Domain\Model\Room\Room;
 use App\Domain\Model\Room\RoomRepositoryInterface;
 use App\Infrastructure\Exception\EntityNotFoundException;
-use App\Infrastructure\Exception\WritingException;
-use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\ORMException;
 use Doctrine\ORM\UnexpectedResultException;
 
-class RoomRepository extends EntityRepository implements RoomRepositoryInterface
+class RoomRepository extends BaseRepository implements RoomRepositoryInterface
 {
     /**
      * @param int $roomId
@@ -33,26 +30,6 @@ class RoomRepository extends EntityRepository implements RoomRepositoryInterface
         } catch (UnexpectedResultException) {
 
             throw new EntityNotFoundException();
-        }
-    }
-
-    /**
-     * @param Room $room
-     *
-     * @return void
-     *
-     * @throws WritingException
-     */
-    public function save(Room $room): void
-    {
-        try {
-
-            $this->getEntityManager()->persist($room);
-            $this->getEntityManager()->flush();
-
-        } catch (ORMException) {
-
-            throw new WritingException();
         }
     }
 }

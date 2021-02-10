@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Model\Room;
 
+use App\Domain\Model\AggregateRoot;
 use App\Infrastructure\Exception\InvalidParameterException;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -14,7 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity()
  * @ORM\Table(name="room")
  */
-class Room
+class Room implements AggregateRoot
 {
     const MAX_NAME_LENGTH = 50;
 

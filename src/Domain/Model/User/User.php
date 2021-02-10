@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Model\User;
 
+use App\Domain\Model\AggregateRoot;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -13,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity()
  * @ORM\Table(name="user")
  */
-class User
+class User implements AggregateRoot
 {
     /**
      * @var int $id

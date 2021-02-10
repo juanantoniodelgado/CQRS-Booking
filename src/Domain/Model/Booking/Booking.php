@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\Model\Booking;
 
 use \DateTimeImmutable;
+use App\Domain\Model\AggregateRoot;
 use App\Domain\Model\User\User;
 use App\Domain\Model\Room\Room;
 use App\Infrastructure\Exception\InvalidParameterException;
@@ -17,7 +18,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity()
  * @ORM\Table(name="booking")
  */
-class Booking
+class Booking implements AggregateRoot
 {
     /**
      * @var int $id
