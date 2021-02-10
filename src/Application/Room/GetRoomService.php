@@ -8,6 +8,7 @@ use App\Domain\Model\Room\Room;
 use App\Domain\Model\Room\RoomRepositoryInterface;
 use App\Infrastructure\Exception\EntityNotFoundException;
 use App\Infrastructure\Exception\InvalidParameterException;
+use App\Infrastructure\Exception\WritingException;
 
 class GetRoomService
 {
@@ -27,6 +28,7 @@ class GetRoomService
      * @return Room
      *
      * @throws InvalidParameterException
+     * @throws WritingException
      */
     public function execute(int $roomId, string $name): Room
     {

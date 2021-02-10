@@ -5,22 +5,22 @@ declare(strict_types=1);
 namespace App\Application\User;
 
 use App\Domain\Model\User\User;
+use App\Domain\Model\User\UserRepositoryInterface;
 use App\Infrastructure\Exception\EntityNotFoundException;
 use App\Infrastructure\Exception\WritingException;
-use App\Infrastructure\Persistance\Doctrine\Repository\UserRepository;
 
 class GetUserService
 {
-    private UserRepository $repository;
+    private UserRepositoryInterface $repository;
     private AddUserService $addUserService;
 
     /**
      * GetUserService constructor.
      *
-     * @param UserRepository $repository
+     * @param UserRepositoryInterface $repository
      * @param AddUserService $addUserService
      */
-    public function __construct(UserRepository $repository, AddUserService $addUserService)
+    public function __construct(UserRepositoryInterface $repository, AddUserService $addUserService)
     {
         $this->repository = $repository;
         $this->addUserService = $addUserService;

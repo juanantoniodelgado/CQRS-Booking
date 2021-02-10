@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace App\Domain\Model\Room;
 
+use App\Domain\Model\BaseRepositoryInterface;
 use App\Infrastructure\Exception\EntityNotFoundException;
 
-interface RoomRepositoryInterface
+interface RoomRepositoryInterface extends BaseRepositoryInterface
 {
     /**
      * @param int $roomId
@@ -14,6 +15,4 @@ interface RoomRepositoryInterface
      * @return Room
      */
     public function byId(int $roomId): Room;
-
-    public function save(Room $room): void;
 }

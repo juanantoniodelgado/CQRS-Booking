@@ -7,6 +7,7 @@ namespace App\Application\Room;
 use App\Domain\Model\Room\Room;
 use App\Domain\Model\Room\RoomRepositoryInterface;
 use App\Infrastructure\Exception\InvalidParameterException;
+use App\Infrastructure\Exception\WritingException;
 
 class AddRoomService
 {
@@ -24,6 +25,7 @@ class AddRoomService
      * @return Room
      *
      * @throws InvalidParameterException
+     * @throws WritingException
      */
     public function execute(int $roomId, string $name): Room
     {
