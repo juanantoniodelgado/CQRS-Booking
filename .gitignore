@@ -1,3 +1,6 @@
+###> OS Related ###
+.DS_Store
+###< OS Related ###
 
 ###> symfony/framework-bundle ###
 /.env.local
