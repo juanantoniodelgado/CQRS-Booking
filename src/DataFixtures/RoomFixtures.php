@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Fixtures;
+namespace App\DataFixtures;
 
 use App\Domain\Model\Room\Room;
 use App\Infrastructure\Exception\InvalidParameterException;
