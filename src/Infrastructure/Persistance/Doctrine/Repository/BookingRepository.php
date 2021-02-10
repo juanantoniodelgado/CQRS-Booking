@@ -5,10 +5,13 @@ declare(strict_types=1);
 namespace App\Infrastructure\Persistance\Doctrine\Repository;
 
 use \DateTimeImmutable;
-use App\Domain\Model\Booking\BookingRepository;
+use App\Domain\Model\Booking\Booking;
+use App\Domain\Model\Booking\BookingRepositoryInterface;
+use App\Infrastructure\Exception\WritingException;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\ORMException;
 
-class BookingRepository extends EntityRepository implements BookingRepository
+class BookingRepository extends EntityRepository implements BookingRepositoryInterface
 {
     /**
      * @param int $roomId
@@ -34,5 +37,22 @@ class BookingRepository extends EntityRepository implements BookingRepository
             ->getQuery()->execute();
 
         return (is_null($result) || empty($result));
+    }
+
+    /**
+     * @param Booking $booking
+     *
+     * @return void
+     *
+     * @throws WritingException
+     */
+    public function save(Booking $booking): void
+    {
+        try {
+            $this->getEntityManager()->flush();
+            $this->getEntityManager()->persist($booking);
+        } catch (ORMException) {
+            throw new WritingException();
+        }
     }
 }

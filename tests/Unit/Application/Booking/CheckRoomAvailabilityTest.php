@@ -7,8 +7,8 @@ namespace App\Tests\Unit\Application\Booking;
 use \DateTimeImmutable;
 use App\Application\Booking\CheckRoomAvailabilityRequest;
 use App\Application\Booking\CheckRoomAvailabilityService;
-use App\Application\Room\GetOrAddRoomService;
-use App\Domain\Model\Booking\BookingRepository;
+use App\Application\Room\GetRoomService;
+use App\Domain\Model\Booking\BookingRepositoryInterface;
 use App\Infrastructure\Exception\InvalidParameterException;
 use App\Tests\Unit\Domain\RoomMother;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -21,12 +21,8 @@ class CheckRoomAvailabilityTest extends TestCase
 
     public function setUp(): void
     {
-        $this->bookingRepository = $this->createMock(BookingRepository::class);
-
-        $this->service = new CheckRoomAvailabilityService(
-            $this->bookingRepository,
-            $this->createMock(GetOrAddRoomService::class)
-        );
+        $this->bookingRepository = $this->createMock(BookingRepositoryInterface::class);
+        $this->service = new CheckRoomAvailabilityService($this->bookingRepository);
     }
 
     /**
@@ -40,7 +36,6 @@ class CheckRoomAvailabilityTest extends TestCase
 
         $request = new CheckRoomAvailabilityRequest(
             $room->getId(),
-            $room->getName(),
             new DateTimeImmutable(),
             new DateTimeImmutable()
         );
@@ -49,6 +44,6 @@ class CheckRoomAvailabilityTest extends TestCase
             ->method('checkAvailability')
             ->willReturn(true);
 
-        $this->assertTrue($this->service->check($request));
+        $this->assertTrue($this->service->execute($request));
     }
 }

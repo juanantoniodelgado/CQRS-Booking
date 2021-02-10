@@ -21,7 +21,7 @@ class UserFixtures extends Fixture
 
         for ($i=0; $i<=20; ++$i) {
 
-            $user = new User($faker->name);
+            $user = new User($i, $faker->name);
             $manager->persist($user);
             $users->add($user);
         }

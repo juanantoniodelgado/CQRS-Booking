@@ -5,34 +5,35 @@ declare(strict_types=1);
 namespace App\Application\Room;
 
 use App\Domain\Model\Room\Room;
-use App\Domain\Model\Room\RoomRepository;
+use App\Domain\Model\Room\RoomRepositoryInterface;
 use App\Infrastructure\Exception\EntityNotFoundException;
 use App\Infrastructure\Exception\InvalidParameterException;
 
-class GetOrAddRoomService
+class GetRoomService
 {
-    private RoomRepository $repository;
-    private AddRoomService $createRoomService;
+    private AddRoomService $addRoomService;
+    private RoomRepositoryInterface $repository;
 
-    public function __construct(RoomRepository $repository, AddRoomService $createRoomService)
+    public function __construct(AddRoomService $addRoomService, RoomRepositoryInterface $repository)
     {
+        $this->addRoomService = $addRoomService;
         $this->repository = $repository;
-        $this->createRoomService = $createRoomService;
     }
 
     /**
      * @param int $roomId
      * @param string $name
+     *
      * @return Room
      *
      * @throws InvalidParameterException
      */
-    public function check(int $roomId, string $name): Room
+    public function execute(int $roomId, string $name): Room
     {
         try {
             $room = $this->repository->byId($roomId);
         } catch (EntityNotFoundException) {
-            $room = $this->createRoomService->create($roomId, $name);
+            $room = $this->addRoomService->execute($roomId, $name);
         }
 
         return $room;

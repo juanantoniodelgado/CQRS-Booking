@@ -9,7 +9,6 @@ use \DateTimeImmutable;
 class CheckRoomAvailabilityRequest
 {
     private int $roomId;
-    private string $name;
     private DateTimeImmutable $arrival;
     private DateTimeImmutable $departure;
 
@@ -17,18 +16,15 @@ class CheckRoomAvailabilityRequest
      * CheckBookingIsFreeRequest constructor.
      *
      * @param int $roomId
-     * @param string $name
      * @param DateTimeImmutable $arrival
      * @param DateTimeImmutable $departure
      */
     public function __construct(
         int $roomId,
-        string $name,
         DateTimeImmutable $arrival,
         DateTimeImmutable $departure
     ){
         $this->roomId = $roomId;
-        $this->name = $name;
         $this->arrival = $arrival;
         $this->departure = $departure;
     }
@@ -39,14 +35,6 @@ class CheckRoomAvailabilityRequest
     public function getRoomId(): int
     {
         return $this->roomId;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName(): string
-    {
-        return $this->name;
     }
 
     /**

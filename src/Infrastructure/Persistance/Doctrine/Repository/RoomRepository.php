@@ -2,26 +2,18 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\Model\Room;
+namespace App\Infrastructure\Persistance\Doctrine\Repository;
 
 use App\Domain\Model\Room\Room;
-use App\Domain\Model\Room\RoomRepository;
+use App\Domain\Model\Room\RoomRepositoryInterface;
 use App\Infrastructure\Exception\EntityNotFoundException;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Infrastructure\Exception\WritingException;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Mapping\ClassMetadata;
+use Doctrine\ORM\ORMException;
 use Doctrine\ORM\UnexpectedResultException;
 
-class DoctrineRoomRepository extends EntityRepository implements RoomRepository
+class RoomRepository extends EntityRepository implements RoomRepositoryInterface
 {
-    private $em;
-
-    public function __construct(EntityManagerInterface $em, ClassMetadata $class)
-    {
-        parent::__construct($em, $class);
-        $this->em = $this->getEntityManager();
-    }
-
     /**
      * @param int $roomId
      * @return Room
@@ -31,7 +23,7 @@ class DoctrineRoomRepository extends EntityRepository implements RoomRepository
     {
         try {
 
-            return $this->em->createQueryBuilder('r')
+            return $this->getEntityManager()->createQueryBuilder('r')
                 ->andWhere('r.id = :val')
                 ->setParameter('val', $roomId)
                 ->getQuery()
@@ -46,11 +38,21 @@ class DoctrineRoomRepository extends EntityRepository implements RoomRepository
 
     /**
      * @param Room $room
-     * @throws \Doctrine\ORM\ORMException
+     *
+     * @return void
+     *
+     * @throws WritingException
      */
     public function save(Room $room): void
     {
-        $this->em->persist($room);
-        $this->em->flush();
+        try {
+
+            $this->getEntityManager()->persist($room);
+            $this->getEntityManager()->flush();
+
+        } catch (ORMException) {
+
+            throw new WritingException();
+        }
     }
 }

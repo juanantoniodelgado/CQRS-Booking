@@ -20,7 +20,6 @@ class User
      *
      * @ORM\Id()
      * @ORM\Column(name="id", type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private int $id;
 
@@ -33,10 +32,12 @@ class User
 
     /**
      * User constructor.
+     * @param int $id
      * @param string $nickname
      */
-    public function __construct(string $nickname)
+    public function __construct(int $id, string $nickname)
     {
+        $this->id = $id;
         $this->nickname = $nickname;
     }
 

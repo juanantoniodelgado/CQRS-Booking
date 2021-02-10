@@ -7,7 +7,8 @@ namespace App\Tests\Fixtures;
 use \DateTime;
 use \DateTimeImmutable;
 use \Exception;
-use App\Domain\Model\Booking\Booking;
+use App\Application\Booking\AddBookingRequest;
+use App\Application\Booking\AddBookingService;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -16,6 +17,18 @@ use Faker\Factory;
 
 class BookingFixtures Extends Fixture implements DependentFixtureInterface
 {
+    private AddBookingService $createBookingService;
+
+    /**
+     * BookingFixtures constructor.
+     *
+     * @param AddBookingService $createBookingService
+     */
+    public function __construct(AddBookingService $createBookingService)
+    {
+        $this->createBookingService = $createBookingService;
+    }
+
     /**
      * @param ObjectManager $manager
      * @throws Exception
@@ -46,7 +59,16 @@ class BookingFixtures Extends Fixture implements DependentFixtureInterface
                     $departure->modify('+' . $faker->numberBetween(1, 10) . ' days')
                 );
 
-                $manager->persist(new Booking($user, $room, $arrival, $departure));
+                $this->createBookingService->execute(
+                    new AddBookingRequest(
+                        $user->getId(),
+                        $user->getName(),
+                        $room->getId(),
+                        $room->getName(),
+                        $arrival,
+                        $departure
+                    )
+                );
             }
         }
 

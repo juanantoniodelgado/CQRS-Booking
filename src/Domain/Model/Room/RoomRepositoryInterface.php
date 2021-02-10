@@ -6,7 +6,7 @@ namespace App\Domain\Model\Room;
 
 use App\Infrastructure\Exception\EntityNotFoundException;
 
-interface RoomRepository
+interface RoomRepositoryInterface
 {
     /**
      * @param int $roomId

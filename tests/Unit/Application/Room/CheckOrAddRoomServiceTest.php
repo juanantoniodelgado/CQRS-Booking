@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Tests\Unit\Application\Room;
 
 use App\Application\Room\AddRoomService;
-use App\Application\Room\GetOrAddRoomService;
-use App\Domain\Model\Room\RoomRepository;
+use App\Application\Room\GetRoomService;
+use App\Domain\Model\Room\RoomRepositoryInterface;
 use App\Infrastructure\Exception\EntityNotFoundException;
 use App\Infrastructure\Exception\InvalidParameterException;
 use App\Tests\Unit\Domain\RoomMother;
@@ -17,16 +17,16 @@ class CheckOrAddRoomServiceTest extends TestCase
 {
     private MockObject $roomRepository;
     private MockObject $addRoomService;
-    private GetOrAddRoomService $getRoomService;
+    private GetRoomService $getRoomService;
 
     public function setUp() : void
     {
-        $this->roomRepository = $this->createMock(RoomRepository::class);
+        $this->roomRepository = $this->createMock(RoomRepositoryInterface::class);
         $this->addRoomService = $this->createMock(AddRoomService::class);
 
-        $this->getRoomService = new GetOrAddRoomService(
-            $this->roomRepository,
-            $this->addRoomService
+        $this->getRoomService = new GetRoomService(
+            $this->addRoomService,
+            $this->roomRepository
         );
     }
 
@@ -44,10 +44,10 @@ class CheckOrAddRoomServiceTest extends TestCase
             ->willThrowException(new EntityNotFoundException());
 
         $this->addRoomService->expects($this->any())
-            ->method('create')
+            ->method('execute')
             ->willReturn($room);
 
-        $result = $this->getRoomService->check($room->getId(), $room->getName());
+        $result = $this->getRoomService->execute($room->getId(), $room->getName());
 
         $this->assertSame($result, $room);
     }
@@ -65,7 +65,7 @@ class CheckOrAddRoomServiceTest extends TestCase
             ->method('byId')
             ->willReturn($room);
 
-        $result = $this->getRoomService->check($room->getId(), $room->getName());
+        $result = $this->getRoomService->execute($room->getId(), $room->getName());
 
         $this->assertSame($result, $room);
     }

@@ -14,6 +14,7 @@ use Faker\Factory;
 class RoomFixtures extends Fixture
 {
     public const ROOM_REFERENCE = 'rooms';
+
     /**
      * @param ObjectManager $manager
      *
