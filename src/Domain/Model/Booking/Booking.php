@@ -9,52 +9,13 @@ use App\Domain\Model\AggregateRoot;
 use App\Domain\Model\User\User;
 use App\Domain\Model\Room\Room;
 use App\Infrastructure\Exception\InvalidParameterException;
-use Doctrine\ORM\Mapping as ORM;
 
-/**
- * Class Booking
- * @package App\Domain\Model\Booking
- *
- * @ORM\Entity()
- * @ORM\Table(name="booking")
- */
 class Booking implements AggregateRoot
 {
-    /**
-     * @var int $id
-     *
-     * @ORM\Id()
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
     private int $id;
-
-    /**
-     * @var User $client
-     *
-     * @ORM\OneToMany(targetEntity="App\Domain\Model\User\User", mappedBy="id")
-     */
     private User $client;
-
-    /**
-     * @var Room $room
-     *
-     * @ORM\OneToMany(targetEntity="App\Domain\Model\Room\Room", mappedBy="id")
-     */
     private Room $room;
-
-    /**
-     * @var DateTimeImmutable $arrival
-     *
-     * @ORM\Column(name="arrival", type="datetime_immutable")
-     */
     private DateTimeImmutable $arrival;
-
-    /**
-     * @var DateTimeImmutable $departure
-     *
-     * @ORM\Column(name="departure", type="datetime_immutable")
-     */
     private DateTimeImmutable $departure;
 
     /**

@@ -12,7 +12,7 @@ doctrine:
         mappings:
             App:
                 is_bundle: false
-                type: annotation
-                dir: '%kernel.project_dir%/src/Infrastructure/Domain/Model'
-                prefix: 'App\Entity'
+                type: yml
+                dir: '%kernel.project_dir%/src/Infrastructure/Persistence/Definition'
+                prefix: 'App\Domain\Model'
                 alias: App

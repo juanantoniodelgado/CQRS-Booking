@@ -1,0 +1,11 @@
+App\Domain\Model\User\User:
+    type: entity
+    repositoryClass: App\Infrastructure\Persistence\Doctrine\Repository\UserRepository
+    table: user
+    id:
+        id:
+            type: integer
+    fields:
+        nickname:
+            type: string
+            length: 30

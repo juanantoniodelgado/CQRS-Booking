@@ -6,33 +6,12 @@ namespace App\Domain\Model\Room;
 
 use App\Domain\Model\AggregateRoot;
 use App\Infrastructure\Exception\InvalidParameterException;
-use Doctrine\ORM\Mapping as ORM;
 
-/**
- * Class Room
- * @package App\Domain\Model\Room
- *
- * @ORM\Entity()
- * @ORM\Table(name="room")
- */
 class Room implements AggregateRoot
 {
     const MAX_NAME_LENGTH = 50;
 
-    /**
-     * @var int $id
-     *
-     * @ORM\Id()
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
     private int $id;
-
-    /**
-     * @var string $name
-     *
-     * @ORM\Column(name="nombre", length=50, type="string")
-     */
     private string $name;
 
     /**

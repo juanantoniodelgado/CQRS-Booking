@@ -1,0 +1,21 @@
+App\Domain\Model\Booking\Booking:
+    type: entity
+    repositoryClass: App\Infrastructure\Persistence\Doctrine\Repository\BookingRepository
+    table: booking
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    oneToMany:
+        client:
+            targetEntity: App\Domain\Model\User\User
+            mappedBy: id
+        room:
+            targetEntity: App\Domain\Model\Room\Room
+            mappedBy: id
+    fields:
+        arrival:
+            type: datetime_immutable
+        departure:
+            type: datetime_immutable
