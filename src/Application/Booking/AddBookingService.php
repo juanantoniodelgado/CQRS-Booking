@@ -7,16 +7,16 @@ namespace App\Application\Booking;
 use App\Application\Room\GetRoomService;
 use App\Application\User\GetUserService;
 use App\Domain\Model\Booking\Booking;
+use App\Domain\Model\Booking\BookingRepositoryInterface;
 use App\Infrastructure\Exception\BookingNotAvailableException;
 use App\Infrastructure\Exception\InvalidParameterException;
 use App\Infrastructure\Exception\WritingException;
-use App\Infrastructure\Persistance\Doctrine\Repository\BookingRepository;
 
 class AddBookingService
 {
     private GetRoomService $roomService;
     private GetUserService $userService;
-    private BookingRepository $repository;
+    private BookingRepositoryInterface $repository;
     private CheckRoomAvailabilityService $availabilityService;
 
     /**
@@ -24,13 +24,13 @@ class AddBookingService
      * @param GetRoomService $roomService
      * @param GetUserService $userService
      * @param CheckRoomAvailabilityService $availability
-     * @param BookingRepository $bookingRepository
+     * @param BookingRepositoryInterface $bookingRepository
      */
     public function __construct(
         GetRoomService $roomService,
         GetUserService $userService,
         CheckRoomAvailabilityService $availability,
-        BookingRepository $bookingRepository
+        BookingRepositoryInterface $bookingRepository
     ){
         $this->roomService = $roomService;
         $this->userService = $userService;
