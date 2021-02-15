@@ -7,7 +7,7 @@ namespace App\Application\Booking;
 use App\Application\Room\GetRoomService;
 use App\Application\User\GetUserService;
 use App\Domain\Model\Booking;
-use App\Domain\Model\Booking\BookingRepositoryInterface;
+use App\Domain\Repository\BookingRepositoryInterface;
 use App\Infrastructure\Exception\BookingAlreadyExists;
 use App\Infrastructure\Exception\BookingNotAvailableException;
 use App\Infrastructure\Exception\InvalidParameterException;

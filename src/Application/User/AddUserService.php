@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Application\User;
 
 use App\Domain\Model\User;
-use App\Domain\Model\User\UserRepositoryInterface;
+use App\Domain\Repository\UserRepositoryInterface;
 use App\Infrastructure\Exception\WritingException;
 
 class AddUserService

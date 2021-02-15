@@ -6,7 +6,7 @@ namespace App\Infrastructure\Persistence\Doctrine\Repository;
 
 use \DateTimeImmutable;
 use App\Domain\Model\Booking;
-use App\Domain\Model\Booking\BookingRepositoryInterface;
+use App\Domain\Repository\BookingRepositoryInterface;
 use App\Infrastructure\Exception\EntityNotFoundException;
 use App\Infrastructure\Exception\WritingException;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;

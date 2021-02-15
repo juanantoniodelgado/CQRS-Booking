@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Application\Booking;
 
-use App\Domain\Model\Booking\BookingRepositoryInterface;
+use App\Domain\Repository\BookingRepositoryInterface;
 use App\Infrastructure\Exception\BookingNotAvailableException;
 
 class CheckRoomAvailabilityService

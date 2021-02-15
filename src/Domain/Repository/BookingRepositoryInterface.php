@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Model\Booking;
+namespace App\Domain\Repository;
 
 use \DateTimeImmutable;
 use App\Domain\Model\Booking;

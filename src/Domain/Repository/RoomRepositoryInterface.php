@@ -2,29 +2,29 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Model\User;
+namespace App\Domain\Repository;
 
-use App\Domain\Model\User;
+use App\Domain\Model\Room;
 use App\Infrastructure\Exception\EntityNotFoundException;
 use App\Infrastructure\Exception\WritingException;
 
-interface UserRepositoryInterface
+interface RoomRepositoryInterface
 {
     /**
-     * @param int $userId
+     * @param int $roomId
      *
      * @throws EntityNotFoundException
      *
-     * @return User
+     * @return Room
      */
-    public function byId(int $userId): User;
+    public function byId(int $roomId): Room;
 
     /**
-     * @param User $user
+     * @param Room $room
      *
      * @return void
      *
      * @throws WritingException
      */
-    public function save(User $user): void;
+    public function save(Room $room): void;
 }
