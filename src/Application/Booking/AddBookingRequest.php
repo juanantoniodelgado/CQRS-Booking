@@ -33,7 +33,7 @@ class AddBookingRequest
         string $roomName,
         DateTimeImmutable $arrival,
         DateTimeImmutable $departure
-    ){
+    ) {
         $this->bookingId = $bookingId;
         $this->userId = $userId;
         $this->userName = $userName;

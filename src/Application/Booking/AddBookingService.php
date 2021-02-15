@@ -34,7 +34,7 @@ class AddBookingService
         CheckRoomAvailabilityService $availability,
         BookingRepositoryInterface $bookingRepository,
         CheckBookingExistsService $existService
-    ){
+    ) {
         $this->roomService = $roomService;
         $this->userService = $userService;
         $this->availabilityService = $availability;
@@ -58,7 +58,8 @@ class AddBookingService
 
         $room = $this->roomService->execute($request->getRoomId(), $request->getRoomName());
 
-        $this->availabilityService->execute(new CheckRoomAvailabilityRequest(
+        $this->availabilityService->execute(
+            new CheckRoomAvailabilityRequest(
                 $room->getId(),
                 $request->getArrival(),
                 $request->getDeparture()

@@ -17,7 +17,7 @@ use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Faker\Factory;
 
-class BookingFixtures Extends Fixture
+class BookingFixtures extends Fixture
 {
     private AddBookingService $createBookingService;
 
@@ -40,12 +40,10 @@ class BookingFixtures Extends Fixture
         $faker = Factory::create();
 
         for ($i=0; $i<10; ++$i) {
-
             $room = RoomMother::random();
             $user = UserMother::random();
 
             for ($k=0; $k<3; ++$k) {
-
                 $arrival = new DateTime('now');
                 $arrival = new DateTimeImmutable(
                     $arrival->modify('+' . $faker->numberBetween(1, 10) . ' days')->format(DateTimeImmutable::ATOM)
@@ -57,7 +55,6 @@ class BookingFixtures Extends Fixture
                 );
 
                 try {
-
                     $this->createBookingService->execute(
                         new AddBookingRequest(
                             $faker->numberBetween(1, 9999),
@@ -69,8 +66,8 @@ class BookingFixtures Extends Fixture
                             $departure
                         )
                     );
-
-                } catch (BookingNotAvailableException | BookingAlreadyExists) {}
+                } catch (BookingNotAvailableException | BookingAlreadyExists) {
+                }
             }
         }
     }

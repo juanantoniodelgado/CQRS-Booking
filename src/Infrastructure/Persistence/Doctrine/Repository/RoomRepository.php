@@ -28,20 +28,15 @@ class RoomRepository extends ServiceEntityRepository implements RoomRepositoryIn
     public function byId(int $roomId): Room
     {
         try {
-
             return $this->getEntityManager()->createQueryBuilder()
                 ->select('r')
-                ->from(Room::class , 'r')
+                ->from(Room::class, 'r')
                 ->where('r.id = :val')
                 ->setParameter('val', $roomId)
                 ->getQuery()
                 ->getSingleResult()
             ;
-
-
-
         } catch (UnexpectedResultException) {
-
             throw new EntityNotFoundException();
         }
     }

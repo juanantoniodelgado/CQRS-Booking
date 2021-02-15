@@ -21,7 +21,7 @@ class CheckRoomAvailabilityRequest
         int $roomId,
         DateTimeImmutable $arrival,
         DateTimeImmutable $departure
-    ){
+    ) {
         $this->roomId = $roomId;
         $this->arrival = $arrival;
         $this->departure = $departure;

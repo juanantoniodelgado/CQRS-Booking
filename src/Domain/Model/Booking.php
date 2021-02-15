@@ -24,9 +24,13 @@ class Booking
      *
      * @throws InvalidParameterException
      */
-    public function __construct(int $id, User $client, Room $room, DateTimeImmutable $arrival, DateTimeImmutable $departure)
-    {
-
+    public function __construct(
+        int $id,
+        User $client,
+        Room $room,
+        DateTimeImmutable $arrival,
+        DateTimeImmutable $departure
+    ) {
         $this->id = $id;
         $this->client = $client;
         $this->room = $room;

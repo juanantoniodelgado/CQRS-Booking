@@ -27,10 +27,9 @@ class CheckBookingExistsService
     public function execute(int $bookingId)
     {
         try {
-
             $this->repository->byId($bookingId);
             throw new BookingAlreadyExists();
-
-        } catch (EntityNotFoundException) {}
+        } catch (EntityNotFoundException) {
+        }
     }
 }

@@ -59,7 +59,6 @@ class BookingRepository extends ServiceEntityRepository implements BookingReposi
     public function byId(int $bookingId): Booking
     {
         try {
-
             return $this->getEntityManager()->createQueryBuilder()
                 ->select('b')
                 ->from(Booking::class, 'b')
@@ -68,9 +67,7 @@ class BookingRepository extends ServiceEntityRepository implements BookingReposi
                 ->getQuery()
                 ->getSingleResult()
             ;
-
         } catch (UnexpectedResultException) {
-
             throw new EntityNotFoundException();
         }
     }

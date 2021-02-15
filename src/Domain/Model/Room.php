@@ -31,7 +31,7 @@ class Room
      */
     public function setId(int $id)
     {
-        if($id <= 0) {
+        if ($id <= 0) {
             throw new InvalidParameterException("Id must be integer and > 0");
         }
 

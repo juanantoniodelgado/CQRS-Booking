@@ -30,7 +30,6 @@ class UserRepository extends ServiceEntityRepository implements UserRepositoryIn
     public function byId(int $userId): User
     {
         try {
-
             return $this->getEntityManager()->createQueryBuilder()
                 ->select('u')
                 ->from(User::class, 'u')
@@ -39,9 +38,7 @@ class UserRepository extends ServiceEntityRepository implements UserRepositoryIn
                 ->getQuery()
                 ->getSingleResult()
             ;
-
         } catch (UnexpectedResultException) {
-
             throw new EntityNotFoundException();
         }
     }
