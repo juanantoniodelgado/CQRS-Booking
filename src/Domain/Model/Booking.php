@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace App\Domain\Model;
 
 use \DateTimeImmutable;
-use App\Domain\Model\User;
-use App\Domain\Model\Room;
 use App\Infrastructure\Exception\InvalidParameterException;
 
 class Booking

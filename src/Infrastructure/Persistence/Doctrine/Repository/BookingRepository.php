@@ -4,16 +4,15 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Persistence\Doctrine\Repository;
 
-use App\Infrastructure\Exception\EntityNotFoundException;
 use \DateTimeImmutable;
 use App\Domain\Model\Booking;
-use App\Infrastructure\Exception\WritingException;
 use App\Domain\Model\Booking\BookingRepositoryInterface;
+use App\Infrastructure\Exception\EntityNotFoundException;
+use App\Infrastructure\Exception\WritingException;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\ORMException;
 use Doctrine\ORM\UnexpectedResultException;
 use Doctrine\Persistence\ManagerRegistry;
-use SebastianBergmann\Comparator\Book;
 
 class BookingRepository extends ServiceEntityRepository implements BookingRepositoryInterface
 {
