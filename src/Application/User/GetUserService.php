@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Application\User;
 
-use App\Domain\Model\User\User;
+use App\Domain\Model\User;
 use App\Domain\Model\User\UserRepositoryInterface;
 use App\Infrastructure\Exception\EntityNotFoundException;
 use App\Infrastructure\Exception\WritingException;

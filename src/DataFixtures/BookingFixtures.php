@@ -7,15 +7,17 @@ namespace App\DataFixtures;
 use \DateTime;
 use \DateTimeImmutable;
 use \Exception;
+use App\Infrastructure\Exception\BookingAlreadyExists;
+use App\Infrastructure\Exception\BookingNotAvailableException;
+use App\Tests\Unit\Domain\RoomMother;
+use App\Tests\Unit\Domain\UserMother;
 use App\Application\Booking\AddBookingRequest;
 use App\Application\Booking\AddBookingService;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Faker\Factory;
 
-class BookingFixtures Extends Fixture implements DependentFixtureInterface
+class BookingFixtures Extends Fixture
 {
     private AddBookingService $createBookingService;
 
@@ -37,52 +39,39 @@ class BookingFixtures Extends Fixture implements DependentFixtureInterface
     {
         $faker = Factory::create();
 
-        /** @var ArrayCollection $rooms */
-        $rooms = $this->getReference(RoomFixtures::ROOM_REFERENCE);
-        /** @var ArrayCollection $users */
-        $users = $this->getReference(UserFixtures::USER_REFERENCE);
+        for ($i=0; $i<10; ++$i) {
 
-        for ($i=0; $i<20; ++$i) {
+            $room = RoomMother::random();
+            $user = UserMother::random();
 
-            $room = $rooms->get($i);
-            $user = $users->get($i);
-
-            for ($k=0; $k<5; ++$i) {
+            for ($k=0; $k<3; ++$k) {
 
                 $arrival = new DateTime('now');
                 $arrival = new DateTimeImmutable(
-                    $arrival->modify('+' . $faker->numberBetween(1, 10) . ' days')
+                    $arrival->modify('+' . $faker->numberBetween(1, 10) . ' days')->format(DateTimeImmutable::ATOM)
                 );
 
-                $departure = new DateTime($arrival);
+                $departure = new DateTime($arrival->format(DateTimeImmutable::ATOM));
                 $departure = new DateTimeImmutable(
-                    $departure->modify('+' . $faker->numberBetween(1, 10) . ' days')
+                    $departure->modify('+' . $faker->numberBetween(1, 10) . ' days')->format(DateTimeImmutable::ATOM)
                 );
 
-                $this->createBookingService->execute(
-                    new AddBookingRequest(
-                        $user->getId(),
-                        $user->getName(),
-                        $room->getId(),
-                        $room->getName(),
-                        $arrival,
-                        $departure
-                    )
-                );
+                try {
+
+                    $this->createBookingService->execute(
+                        new AddBookingRequest(
+                            $faker->numberBetween(1, 9999),
+                            $user->getId(),
+                            $user->getName(),
+                            $room->getId(),
+                            $room->getName(),
+                            $arrival,
+                            $departure
+                        )
+                    );
+
+                } catch (BookingNotAvailableException | BookingAlreadyExists) {}
             }
         }
-
-        $manager->flush();
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getDependencies() : array
-    {
-        return [
-            RoomFixtures::class,
-            UserFixtures::class,
-        ];
     }
 }

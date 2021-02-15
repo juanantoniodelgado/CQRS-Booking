@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Application\Room;
 
-use App\Domain\Model\Room\Room;
+use App\Domain\Model\Room;
 use App\Domain\Model\Room\RoomRepositoryInterface;
 use App\Infrastructure\Exception\EntityNotFoundException;
 use App\Infrastructure\Exception\InvalidParameterException;

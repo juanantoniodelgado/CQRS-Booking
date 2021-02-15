@@ -8,6 +8,7 @@ use \DateTimeImmutable;
 
 class AddBookingRequest
 {
+    private int $bookingId;
     private int $userId;
     private string $userName;
     private int $roomId;
@@ -16,6 +17,7 @@ class AddBookingRequest
     private DateTimeImmutable $departure;
 
     /**
+     * @param int $bookingId
      * @param int $userId
      * @param string $userName
      * @param int $roomId
@@ -24,6 +26,7 @@ class AddBookingRequest
      * @param DateTimeImmutable $departure
      */
     public function __construct(
+        int $bookingId,
         int $userId,
         string $userName,
         int $roomId,
@@ -31,12 +34,21 @@ class AddBookingRequest
         DateTimeImmutable $arrival,
         DateTimeImmutable $departure
     ){
+        $this->bookingId = $bookingId;
         $this->userId = $userId;
         $this->userName = $userName;
         $this->roomId = $roomId;
         $this->roomName = $roomName;
         $this->arrival = $arrival;
         $this->departure = $departure;
+    }
+
+    /**
+     * @return int
+     */
+    public function getBookingId(): int
+    {
+        return $this->bookingId;
     }
 
     /**

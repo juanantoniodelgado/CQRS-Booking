@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Application\Booking;
 
 use App\Domain\Model\Booking\BookingRepositoryInterface;
+use App\Infrastructure\Exception\BookingAlreadyExists;
+use App\Infrastructure\Exception\BookingNotAvailableException;
 
 class CheckRoomAvailabilityService
 {
@@ -17,15 +19,18 @@ class CheckRoomAvailabilityService
 
     /**
      * @param CheckRoomAvailabilityRequest $request
-     *
-     * @return bool
+     * @throws BookingNotAvailableException
      */
-    public function execute(CheckRoomAvailabilityRequest $request): bool
+    public function execute(CheckRoomAvailabilityRequest $request)
     {
-        return $this->repository->checkAvailability(
+        $available = $this->repository->checkAvailability(
             $request->getRoomId(),
             $request->getArrival(),
-            $request->getDeparture(),
+            $request->getDeparture()
         );
+
+        if (false === $available) {
+            throw new BookingNotAvailableException();
+        }
     }
 }

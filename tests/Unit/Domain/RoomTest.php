@@ -8,7 +8,7 @@ use App\Infrastructure\Exception\InvalidParameterException;
 use Faker\Factory;
 use Faker\Generator;
 use PHPUnit\Framework\TestCase;
-use App\Domain\Model\Room\Room;
+use App\Domain\Model\Room;
 
 class RoomTest extends TestCase
 {

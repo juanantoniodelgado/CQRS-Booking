@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\DataFixtures;
 
-use App\Domain\Model\User\User;
+use App\Domain\Model\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Persistence\ObjectManager;
@@ -22,11 +22,11 @@ class UserFixtures extends Fixture
         for ($i=0; $i<=20; ++$i) {
 
             $user = new User($i, $faker->name);
-            $manager->persist($user);
+            //$manager->persist($user);
             $users->add($user);
         }
 
-        $manager->flush();
+        //$manager->flush();
         $this->addReference(self::USER_REFERENCE, $users);
     }
 }

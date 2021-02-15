@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Domain;
 
-use App\Domain\Model\Room\Room;
+use App\Domain\Model\Room;
 use App\Infrastructure\Exception\InvalidParameterException;
 use Faker\Factory;
 

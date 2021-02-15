@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\DataFixtures;
 
-use App\Domain\Model\Room\Room;
+use App\Domain\Model\Room;
 use App\Infrastructure\Exception\InvalidParameterException;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -28,11 +28,11 @@ class RoomFixtures extends Fixture
         for ($i=1; $i<=20; ++$i) {
 
             $room = new Room($i, $faker->name);
-            $manager->persist($room);
+            //$manager->persist($room);
             $rooms->add($room);
         }
 
-        $manager->flush();
+        //$manager->flush();
         $this->addReference(self::ROOM_REFERENCE, $rooms);
     }
 }
