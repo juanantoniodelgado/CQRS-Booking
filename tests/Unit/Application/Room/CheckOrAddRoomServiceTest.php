@@ -6,7 +6,7 @@ namespace App\Tests\Unit\Application\Room;
 
 use App\Application\Room\AddRoomService;
 use App\Application\Room\GetRoomService;
-use App\Domain\Model\Room\RoomRepositoryInterface;
+use App\Domain\Repository\RoomRepositoryInterface;
 use App\Infrastructure\Exception\EntityNotFoundException;
 use App\Infrastructure\Exception\InvalidParameterException;
 use App\Tests\Unit\Domain\RoomMother;
