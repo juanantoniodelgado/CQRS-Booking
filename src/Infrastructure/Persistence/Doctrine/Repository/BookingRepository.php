@@ -34,12 +34,7 @@ class BookingRepository extends ServiceEntityRepository implements BookingReposi
             ->select('b')
             ->from(Booking::class, 'b')
             ->where('IDENTITY(b.room) = :roomId')
-
-            // This exclude bookings that are prior and future to the proposed dates.
             ->andWhere('b.departure > :arrival AND b.arrival < :departure')
-
-            ->andWhere(':arrival BETWEEN b.arrival AND b.departure')
-            ->andWhere(':departure BETWEEN b.arrival AND b.departure')
 
             ->setParameter('roomId', $roomId)
             ->setParameter('arrival', $arrival)

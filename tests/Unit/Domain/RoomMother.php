@@ -24,4 +24,20 @@ final class RoomMother
             $faker->name
         );
     }
+
+    /**
+     * @return array
+     *
+     * @throws InvalidParameterException
+     */
+    public static function randomArray(): array
+    {
+        $result = [];
+
+        for ($i=0; $i<10; ++$i) {
+            $result[] = self::random();
+        }
+
+        return $result;
+    }
 }

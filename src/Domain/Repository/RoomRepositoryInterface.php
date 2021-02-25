@@ -7,6 +7,8 @@ namespace App\Domain\Repository;
 use App\Domain\Model\Room;
 use App\Infrastructure\Exception\EntityNotFoundException;
 use App\Infrastructure\Exception\WritingException;
+use DateTimeImmutable;
+use Doctrine\Common\Collections\ArrayCollection;
 
 interface RoomRepositoryInterface
 {
@@ -27,4 +29,11 @@ interface RoomRepositoryInterface
      * @throws WritingException
      */
     public function save(Room $room): void;
+
+    /**
+     * @param DateTimeImmutable $arrival
+     * @param DateTimeImmutable $departure
+     * @return array
+     */
+    public function getAvailableRooms(DateTimeImmutable $arrival, DateTimeImmutable $departure): array;
 }
